@@ -63,7 +63,9 @@ class App extends React.Component {
   addItem = (e) => {
     e.preventDefault();
     const newItem = this.state.currentItem;
-    if (newItem.text !== "") {
+ //   var count = newItem.split(' ').length - 1;
+    
+    if (newItem.text !== "" && newItem.text!==" ") {
       const items = [...this.state.items, newItem];
       this.setState({
         items: items,
@@ -74,11 +76,15 @@ class App extends React.Component {
       });
       //  console.log(items)
     } 
+    localStorage.setItem("items",JSON.stringify(this.state.items))
+    localStorage.setItem("currentItem",JSON.stringify(this.state.currentItem))
+    
+
   };
   handleInput = (e) => {
     this.setState({
       currentItem: {
-        text: e.target.value,
+        text: e.target.value.replace(/[^a-z\s]/ig, '').replace(/\s{2,}/g, ' '),
         key: Date.now(),
       },
     });
@@ -99,7 +105,7 @@ class App extends React.Component {
   setUpdate = (value, key) => {
     const n = this.state.items.map((item) => {
       if (item.key == key) {
-        item.text = value;
+        item.text = value.replace(/[^a-z\s]/ig, '').replace(/\s{2,}/g, ' ');
       }
       return item;
     });
@@ -110,8 +116,9 @@ class App extends React.Component {
     document.querySelector("body").style.backgroundColor =
       this.state.selected.value;
     return (
-      <div style={{ backgroundColor: this.state.selected.value }}>
-        <div class="ui menu">
+      <React.Fragment>
+
+        <div class="ui menu" >
           <br />
           <h5 className="ui center aligned icon header">
             <i class="circular users icon"></i>
@@ -129,6 +136,9 @@ class App extends React.Component {
             }
           </div>
         </div>
+          
+      <div style={{ backgroundColor: this.state.selected.value }}>
+        {}
 
         <div className="App" style={{backgroundColor:this.state.selected.secondary}}>
           <br />
@@ -167,6 +177,7 @@ class App extends React.Component {
         <br/>
         <br/>
       </div>
+      </React.Fragment>
     );
   }
 }

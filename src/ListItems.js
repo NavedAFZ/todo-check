@@ -8,7 +8,13 @@ const ListItems = (props) => {
   //   console.log("top",items)
   const [dis, setDis] = useState("none");
   const [btnDis, setBtnDis] = useState("none");
-  const val = props.items.map((item) => {
+  const val1=props.items.filter((item)=>{
+    if(item.text!=='')
+    {
+      return item;
+    }
+  })
+  const val = val1.map((item) => {
     return (
       <div className="List " key={item.key}>
         <p>

@@ -1,12 +1,15 @@
 body{
   background-color: #9266ff;
 }
+ .ui.menu{
+  margin: auto;
+} 
 .App{
   background-color: #3f3160;
   min-height:500px;
   width: 600px;
   height: 100%;
-  margin: 100px auto;
+  margin: 0px auto;
   border-radius: 10px;
 
 }
